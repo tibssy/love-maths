@@ -1,31 +1,31 @@
-function displayAdditionQuestion() {
+function displayAdditionQuestion() {}
 
-}
+function displaySubtractQuestion() {}
 
-function displaySubtractQuestion() {
-    
-}
+function displayMultiplyQuestion() {}
 
-function displayMultiplyQuestion() {
-    
-}
+function incrementScore() {}
 
-function incrementScore() {
+function incrementWrongAnswer() {}
 
-}
+function calculateCorrectAnswer() {}
 
-function incrementWrongAnswer() {
+function checkAnswer() {}
 
-}
+function runGame() {}
 
-function calculateCorrectAnswer() {
+document.addEventListener("DOMContentLoaded", function () {
+  let buttons = document.getElementsByTagName("button");
 
-}
-
-function checkAnswer() {
-
-}
-
-function runGame() {
-
-}
+  for (let button of buttons) {
+    console.log(button);
+    button.addEventListener("click", function () {
+      let buttonType = this.getAttribute("data-type");
+      if (buttonType === "submit") {
+        alert("You clicked submit");
+      } else {
+        alert(`You clicked ${buttonType}`);
+      }
+    });
+  }
+});
