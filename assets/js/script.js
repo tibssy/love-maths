@@ -12,9 +12,41 @@ function incrementScore() {}
 
 function incrementWrongAnswer() {}
 
-function calculateCorrectAnswer() {}
+function calculateCorrectAnswer() {
+  let operand1 = parseInt(document.getElementById("operand1").textContent);
+  let operand2 = parseInt(document.getElementById("operand2").textContent);
+  let operator = document.getElementById("operator").textContent;
 
-function checkAnswer() {}
+  switch (operator) {
+    case "+":
+      return [operand1 + operand2, "addition"];
+    case "-":
+      return;
+    case "*":
+      return;
+    case "/":
+      return;
+    default:
+      alert(`Unimplemented operator ${operator}`);
+      throw `Unimplemented operator ${operator}. Aborting!`;
+  }
+}
+
+function checkAnswer() {
+  let userAnswer = parseInt(document.getElementById("answer-box").value);
+  let calculatedAnswer = calculateCorrectAnswer();
+  let isCorrect = userAnswer === calculatedAnswer[0];
+
+  if (isCorrect) {
+    alert("Hey! You got it right! :)");
+  } else {
+    alert(
+      `Awwww.... you answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}.`
+    );
+  }
+
+  runGame(calculatedAnswer[1]);
+}
 
 function runGame(gameType) {
   let num1 = Math.floor(Math.random() * 25) + 1;
@@ -38,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
       let buttonType = this.getAttribute("data-type");
       if (buttonType === "submit") {
-        alert("You clicked submit");
+        checkAnswer();
       } else {
         runGame(buttonType);
       }
