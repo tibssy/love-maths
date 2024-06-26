@@ -5,12 +5,18 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
-  document.getElementById("operand1").textContent = operand1;
-  document.getElementById("operand2").textContent = operand2;
+  let operands =
+    operand1 < operand2 ? [operand2, operand1] : [operand1, operand2];
+  document.getElementById("operand1").textContent = operands[0];
+  document.getElementById("operand2").textContent = operands[1];
   document.getElementById("operator").textContent = "-";
 }
 
-function displayMultiplyQuestion() {}
+function displayMultiplyQuestion(operand1, operand2) {
+  document.getElementById("operand1").textContent = operand1;
+  document.getElementById("operand2").textContent = operand2;
+  document.getElementById("operator").textContent = "x";
+}
 
 function incrementScore() {
   let score = parseInt(document.getElementById("score").textContent);
@@ -32,8 +38,8 @@ function calculateCorrectAnswer() {
       return [operand1 + operand2, "addition"];
     case "-":
       return [operand1 - operand2, "subtract"];
-    case "*":
-      return;
+    case "x":
+      return [operand1 * operand2, "multiply"];
     case "/":
       return;
     default:
@@ -71,6 +77,9 @@ function runGame(gameType) {
     case "subtract":
       displaySubtractQuestion(num1, num2);
       break;
+    case "multiply":
+      displayMultiplyQuestion(num1, num2);
+      break;
     default:
       alert(`Unkown game type ${gameType}`);
       throw `Unkown game type ${gameType}. Aborting!`;
@@ -81,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let buttons = document.getElementsByTagName("button");
 
   for (let button of buttons) {
-    console.log(button);
     button.addEventListener("click", function () {
       let buttonType = this.getAttribute("data-type");
       if (buttonType === "submit") {
