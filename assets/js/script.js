@@ -18,6 +18,12 @@ function displayMultiplyQuestion(operand1, operand2) {
   document.getElementById("operator").textContent = "x";
 }
 
+function displayDivisionQuestion(operand1, operand2) {
+  document.getElementById("operand1").textContent = operand1 * operand2;
+  document.getElementById("operand2").textContent = operand2;
+  document.getElementById("operator").textContent = "/";
+}
+
 function incrementScore() {
   let score = parseInt(document.getElementById("score").textContent);
   document.getElementById("score").textContent = ++score;
@@ -41,7 +47,7 @@ function calculateCorrectAnswer() {
     case "x":
       return [operand1 * operand2, "multiply"];
     case "/":
-      return;
+      return [operand1 / operand2, "division"];
     default:
       alert(`Unimplemented operator ${operator}`);
       throw `Unimplemented operator ${operator}. Aborting!`;
@@ -82,6 +88,9 @@ function runGame(gameType) {
       break;
     case "multiply":
       displayMultiplyQuestion(num1, num2);
+      break;
+    case "division":
+      displayDivisionQuestion(num1, num2);
       break;
     default:
       alert(`Unkown game type ${gameType}`);
